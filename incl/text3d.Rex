@@ -1,0 +1,6 @@
+omega <- seq(0, 6*pi, length.out=1000)
+x <- sin(omega); y <- cos(omega)
+col <- hsv(omega/max(omega), 1,1)
+plot3d(x,y,omega, pch=176, col=col)
+o <- seq(1, length(x), by=20)
+text3d(x[o],y[o],omega[o], col=rev(col[o]))

@@ -1,0 +1,11 @@
+Package: R.basic
+Version: 0.53.0
+Date: 2013-05-30
+Title: [R] Class Library - Stand-alone basic functions [DEPRECATED]
+Author: Henrik Bengtsson <henrikb@braju.com>
+Maintainer: Henrik Bengtsson <henrikb@braju.com>
+Depends: R (>= 2.10.0), R.methodsS3(>= 1.2.2), R.oo (>= 1.9.3), R.utils (>= 1.12.1)
+Description: [THIS PACKAGE HAS BEEN DEPRECATED. Do not start building new projects based on it. It remains available for backward compatibility.] This package contains basic functions that are "missing" in the [R] base package.
+License: LGPL (>= 2.1)
+URL: http://www.braju.com/R/
+LazyLoad: TRUE

@@ -1,0 +1,8 @@
+# Export everything
+exportPattern(".*")
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# DECLARATIONS
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+S3method("[", "ListVector");
+S3method("[[", "ListVector");

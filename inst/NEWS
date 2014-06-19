@@ -1,0 +1,424 @@
+Package: R.basic
+================
+
+Version: 0.53.0 [2013-05-30]
+o Package passes R CMD check on R v3.0.0 and R devel.
+o CLEANUP: Dropped R (< 1.9.0) workarounds for assertVersion() and
+  packageDescription(), because package requires R (>= 2.10.0).
+o CLEANUP: Now R.basic::abline() calls graphics::abline() internally.
+o CLEANUP: Now local hist.default() is a wrapper calling
+  graphics::hist.default() instead of being a copy of it.
+o CRAN POLICY: Now all Rd \usage{} lines are at most 90 characters long.
+o CRAN POLICY: Now all Rd example lines are at most 100 characters long. 
+
+
+Version: 0.52.0 [2013-02-07]
+o Package passes R CMD check on R v2.15.2 with 1 WARNING.
+o Updated package to have a NAMESPACE.
+o BUG FIX: ListVector no longer defines a Class constructor, but just
+  a plain function. This because it may return NULL, which is invalid
+  R.oo code.
+
+
+Version: 0.51.0 [2012-05-04]
+o BUG FIX: zscore(..., robust=TRUE) estimated the standard deviation
+  incorrectly as the square root of MAD, when it should have been MAD.
+  This error has probably been there since the very early days.
+  Thanks Taku Tokuyasu at UCSF for spotting this.
+
+
+Version: 0.50.2 [2012-03-27]
+o ROBUSTNESS: Now plotParallel() calls axis() with full argument names.
+
+
+Version: 0.50.1 [2011-06-06]
+o CONSISTENCY: For consistency with the renaming of tail() to tail2(),
+  we also renamed head() to head2().  It will also lower the risk of
+  conflicting with the head() function available in the 'utils' package
+  of more recent versions of R.
+o CONFLICT/BUG FIX: Renamed tail() to tail2(), because in more recent
+  versions of R there is another tail() defined in the 'utils' package.
+  For such version of R, Rterm on Windows would hang on TAB completion.
+  Thanks "Neal" for report on this problem.
+
+
+Version: 0.50.0 [2010-11-28]
+o Package passes R CMD check on R v2.12.0.
+o This release is provided such that the package installs
+  correctly and pass R CMD check on R v2.12.0.  There is no
+  guarantee that the methods works correctly.  For the next
+  release, the plan is to clean out deprecated functions and
+  utilize existing functions available elsewhere, e.g. factorial().
+o Using packageStartupMessage() instead of cat().
+o CONSISTENCY: Updated the name of the argument for factorial()
+  to match that of base::factorial().  The latter didn't exist
+  when it was first added to this package.
+o EXAMPLES: Updated a few examples so that they don't give an error.
+o DOCUMENTATION: Fixed a few Rd syntax errors and updated a few
+  Rd cross references.
+o DEPRECATED: about() is deprecated and will thrown an exception.
+o Renamed HISTORY to NEWS.
+o Updated to use x.y.z version format.
+
+
+Version: 0.49 [2006-02-14]
+o Removed all methods that were deprecated in v0.48.  Please install
+  aroma.light for these.
+
+
+Version: 0.48 [2006-02-13]
+o The following methods have been moved to the aroma.light package and
+  is therefore made deprecated in the R.basic package and will be
+  removed from the latter in the future: distanceBetweenLines(),
+  iwpca(), wpca(), robustSmoothSpline(), robust.smooth.spline(),
+  likelihood.smooth.spline(), print.SmoothSplineLikelihood(),
+  weightedMedian(), and weighed.median().
+
+
+Version: 0.47 [2006-02-10]
+o Removed image.matrix(), which has been deprecated for almost a year.
+  Package now pass R CMD check without warnings.
+
+
+Version: 0.46 [2005-07-19]
+o Renamed weighted. median() to weightedMedian() and robust.smooth.spline()
+  to robustSmoothSpline(). The formers remain, but will soon be deprecated.
+
+
+Version: 0.45 [2005-06-12]
+o Package now depends on R.utils because many methods have moved there;
+  Moved capitalize(), commandArgs(), doCall(), gunzip(), insert(),
+  intToBin(), intToHex(), intToOct(), isZero(), patchCode(), relibrary(),
+  and seqToHumanReadable() to R.utils.
+
+
+Version: 0.44 [2005-02-25]
+o Updated the internal list of reserved arguments for commandArgs().
+o Added argument 'asValues' to commandArgs(). If TRUE, arguments
+  will be parsed such that --foo=value will be returned in a
+  named list containing the element 'foo' with string value 'value'.
+  Simple argument, say, --details, will be returned as an element
+  with value TRUE and name 'details'.
+
+
+Version: 0.43 [2005-02-20]
+o Added image270() to replace image.matrix() in future versions.
+o Package now passes R CMD check with 1 warnings, which is due
+  to deprecated image.matrix().
+  On R v2.0.1 devel there is a warning about 'modreg' has merged
+  with 'stats'.
+o Removed a few functions that patched R v1.4.x.
+o Removed function rgb() because it was included in R v1.6.0.
+o Added '...' arguments to please R CMD check.
+o Updated broken Rd links.
+o TO DO: Several definitions are still "hard coded" function
+  definitions, which does not make use of setMethodS3().
+  This should be fixed in future versions.
+o TO DO: Several functions/methods needs to be documented.
+
+
+Version: 0.42 [2005-02-09]
+o Added support for weights in robust.smooth.spline().
+o Added weight functions "symmetric" (Tukey's biweight; default) and
+  "tricube" to iwpca(). In addition to this, any function can now be
+  used as a weight function.
+o All plot functions with argument 'col' now use default value
+  col=par("col") and not col=NULL as before, which from R v2.0.0
+  corresponds to "transparent" colors and not "black".
+o normalizeQuantile() has moved to the aroma package and has
+  been removed from this package.
+o Added patchCode().
+
+
+Version: 0.41 [2004-12-28]
+o Added doCall().
+
+
+Version: 0.40 [2004-10-15]
+o Added seqToHumanReadable() which converts c(1:10, 15:18, 20))
+  into "1-10, 15-18, 20".
+o Package is no longer indepent of R.oo. This is for convenience
+  in order to make use of setMethodS3().
+o Updated DESCRIPTION with correct Depends and set LazyLoad to
+  FALSE in order for package to install on both R v1.9.1 and
+  R v2.0.0. In the future, when most people have migrated to
+  R v2.x, LazyLoad will be turned on. This will probably happen
+  when R v2.1.0 comes out in half a year.
+
+
+Version: 0.39 [2004-06-27]
+o Added the gridOptim() function and the ListVector class.
+
+
+Version: 0.38 [2004-04-21]
+o Fixed deprecated warning about package.description() that
+  occured R v1.9.0 such that the code still works for older
+  versions of R. This was needed for about() and assertVersion().
+o Fixed error with plot.histogram() that occured because it
+  is from R v1.9.0 a private function in the graphics package.
+o Fixed R v1.9.0 "modreg -> stats bug" in smooth.spline.fit().
+o Added support for weights in iwpca(), weights that in each
+  iteration are multiplied by the internal residual weights.
+  This will for instance make it possible to do windowed IWPCA
+  in one or two dimensions.
+
+
+Version: 0.37 [2004-04-07]
+o Added a second example to wpca() comparing ordinary and orthogonal
+  linear "regression" with and without intercept.
+
+
+Version: 0.36 [2004-03-09]
+o Added the weighted principal component analysis (WPCA) method wpca().
+o The iterative re-weighted PCA (IWPCA) method iwpca() is now making
+  use of wpca() instead of the acp() function in the 'multidim' package.
+  Thus, R.basic is all that is needed for iwpca() to work.
+o Made more use of Rdoc comments, which in turn resulted in much less
+  warnings in R CMD check.
+
+
+Version: 0.35 [2003-12-31]
+o Added gunzip() from the com.braju.sma package.
+o Added distanceBetweenLines().
+o Added iwpca() for fitting R-dimensional hyperplanes using iterative
+  re-weighted PCA.
+o Added drawGrid().
+o BUG FIX: Internally argument 'lty' and 'lwd' of lines3d() should have
+  a length equal to the number of points minus one. Forgot to subtract one.
+
+
+Version: 0.34 [2003-07-07]
+o BUG FIX (R v1.7.x related): image.matrix() would generate the error
+  "evaluation is nested too deeply: infinite recursion?", which happened
+  because image() was called internally and not image.default().
+o BUG FIX (R v1.7.x related): R CMD would give an error for
+  example(plotParallel) since it was using F instead of FALSE.
+o Rdoc FIXES: Added some missing argument descriptions.
+
+
+Version: 0.33 [2003-04-13]
+o Package R.base has been renamed to R.basic and made deprecated to minimize
+  the risk for mistaking the name with the base package in the R distribution.
+o BUG FIX: The introduction of namespaces in R v1.6 made the plot.histogram()
+  function overloaded here stop working. The reason is that now
+  hist.default() needs to live in the same environment as plot.histogram().
+
+
+Version: 0.32 [2003-03-03]
+o Made all 3D plot functions generic functions.
+o BUG FIX: The internal plot() function had ylim=c(0,1) hard coded making
+  horizontal=FALSE to fail working. I can not remember when I introduced
+  this bug, but it used to work at some time.
+o BUG FIX: depthOrder=TRUE for points3d() messed up the order of the
+  arguments cex, col and pch. This bug was introduced in previous update.
+
+
+Version: 0.31 [2003-02-21]
+o Added primeFactors() to factorize a positive integer into prime factors
+  and allFactors() to factorize a positive integer into all possible
+  factors, including, but not only, prime factors.
+o Added the functions nChooseK() to calculate "n choose k", gcd() to
+  calculate the greatest common divider between two integers and isZero()
+  to check if a value is zero, i.e. close to zero, or not.
+o Updated error message of lines.loess() to contain data.class(x) instead
+  of class(x).
+o Added methods for generating and enumerating permutations of a vector.
+  The lexicographicPermutations() and lexicographicPermutation() function
+  generated all and only the n:th lexicographic permutation(s) of a vector.
+  The generic function permutations() is a wrapper function that calls
+  any of the defined permutation generator functions.
+o Added stem3d() to add stems, i.e. points with lines going down to the
+  xy plane (optionally the xz plane or the yz plane and in any direction).
+o Add some extra information to the perspective matrix returned by plot3d()
+  as it might be needed by other plot functions, e.g. stem3d() need the zlim.
+o Update the help page for weighted.median() with description of the
+  arguments 'method'.
+
+
+Version: 0.30 [2003-01-07]
+o Added capitalize() and decapitalize().
+o Added argument depthOrder=TRUE to plot3d() and points3d() to specify if
+  the data points should be plotted back-to-from relative to the view plane
+  or not. If not, the plotting will be faster.
+
+
+Version: 0.29 [2002-11-28]
+o Added arguments 'xlim=NULL' and 'ylim=NULL' to plotParallel().
+
+
+Version: 0.28 [2002-11-24]
+o Added insert().
+
+
+Version: 0.27 [2002-11-04]
+o Now the rgb() function is only loaded for pre R v1.6.0 systems.
+o Added lines() for class loess, i.e. lines.loess().
+o Added polygon3d(). Note that angle is still not adjusted for the 3d
+  transformation.
+o Added pointsOnSphere().
+
+
+Version: 0.26 [2002-10-24]
+o Added normalizeQuantile(), which was adapted from Ben Bolstad/Gordon Smyth
+  normalize.quantile(), but this one also accepts weights and the option
+  to calculate the average sample distribution using the median function.
+o Made the package to comply with the new Rx.oo package, which actually
+  should mean nothing to this package, but I can not remember.
+
+
+Version: 0.25 [2002-10-14]
+o Added factorToNumeric().
+
+
+Version: 0.24 [2002-07-18]
+o Added intToBin().
+
+
+Version: 0.23 [2002-07-12]
+o size() now also works for data frames.
+o BUG FIX: intToHex(0) and intToOct(0) gave "". The problem was in
+  as.character.oct/hexmode().
+o Added argument 'maxColorValue' to rgb().
+
+
+Version: 0.22 [2002-06-28]
+o Added apply2d().
+o Added an extended version of commandArgs().
+o Updates to weighted.median(): Made argument na.rm=FALSE as default
+  for efficiency reasons. Improved speed somewhat. Added argument
+  method=c("quick", "shell") for speed improvement. Added simple
+  benchmark information in the help.
+
+
+Version: 0.21 [2002-05-31]
+o Added the matrix manipulation methods, flip.matrix(), mirror.matrix(),
+  rotate90.matrix(), rotate180.matrix(), rotate270.matrix().
+o Added rgb2col(), which is the inverse function to col2rgb().
+o The output of intToHex() and intToOct() is of the same dimensions as
+  the input.
+o Added image.matrix(), which simplify rotates the matrix/image
+  90 degrees clockwise before sending it to image(). The Rd example is
+  useful!
+
+
+Version: 0.20 [2002-05-25]
+o This package passes the R CMD check test with 5 warnings.
+o BUG FIX: getTerminalInfo() gave an error if R was run with stdin
+  redirected from a file since 'stty -a' is used.
+
+
+Version: 0.19 [2002-05-05]
+o throw() and trycatch() are now also available in the R.oo package
+  and they are identical. Maybe they will be removed from here in
+  the future.
+o Added a trial version of packagePaths().
+
+
+Version: 0.18 [2002-04-24]
+o Added lines.loess() for easier plotting of the loess lines.
+o Added mad.loess() which estimates the mad() of the loess fitted
+  data as a function of the control variables. By default a two sided
+  estimation is done.
+
+
+Version: 0.17 [2002-04-21]
+o Redefined throw.default() so it takes several arguments, which are then
+  pasted together with sep="". In other words, instead of doing
+    stop(paste("bla bla", "value:", x, ".\n", sep=""))
+  one can now do
+    throw("bla bla", "value:", x, ".\n")
+
+
+Version: 0.16 [2002-04-08]
+o Now assertVersion() does give a more informative error message if
+  the wanted package is not installed at all. It also writes a little
+  bit about where to get information about the latest version of [R]
+  if that is missing.
+o Added intToOct() to convert integers to hexadecimal numbers.
+o Added plotParallel() for plotting parallel coordinates.
+o Added lines3d() for plotting lines in 3d plots.
+o Added file.info() bug fix. To be removed when fixed in [R].
+
+
+Version: 0.15 [2002-04-04]
+o Added trial version of getTerminalInfo().
+o Updated more() to make use of getTerminalInfo().
+
+
+Version: 0.14 [2002-04-02]
+o Added about() to easier get an overview of installed packages.
+o Package now passes Rcmd check.
+
+
+Version: 0.13 [2002-03-30]
+o Added baseAndExtension() since it is used so often.
+
+
+Version: 0.12 [2002-03-28]
+o Added text3d().
+
+
+Version: 0.11 [2002-03-14]
+o Added plot3d() and points3d() after Ben Bolker's interesting email
+  about persp() in the r-help mailinglist. Note that these methods
+  plots the data on the correct z-order also, i.e. data at the back
+  is plotted first and then the data at the front.
+
+
+Version: 0.10 [2002-03-08]
+o BUG FIX: "ANY" in trycatch() caught everything, not only exceptions.
+
+
+Version: 0.9 [2002-03-02]
+o Improved the speed for robust.smooth.spline(). Created an internal
+  smooth.spline0(), which give identical output to smooth.spline(), but it
+  is much faster if all x values are unique. It can two subfunctions;
+  smooth.spline.prepare() and smooth.spline.fit(). These two function
+  are of interest for robust.smooth.spline() which calls
+  smooth.spline.prepare() only once, but smooth.spline.fit() repeatadly,
+  a design which improves the speed significantly.
+o Added a likelihood() method for class smooth.spline, which calculates
+  the log likelihood (with components) for a fitted smoothing spline.
+o Added a trial version of trycatch(). This required a minor modification
+  of try(), which is still 100% compatible with the try() in [R] base.
+o Update weigthed.median() to call median() when it is possible.
+o Weights are currently not used robust.smooth.spline() more than
+  internally.
+
+
+Version: 0.8 [2002-02-18]
+o Added robust.smooth.spline() to fit a smoothing spline with L_1 norm.
+o Modified weighted.median() to (optionally) make use of linear
+  interpolation to get a consistent estimate of the weighted median.
+o Added a fix for the buggy [R] v1.4.1 version of matchSignature() in
+  library 'methods'.
+p Made the read.table() fix a [R] v1.4.0 fix only.
+
+
+Version: 0.7 [2002-02-07]
+o Added weighted.median().
+
+
+Version: 0.6 [2002-01-25]
+o Added assertVersion() to simply assertion of package versions.
+o Added the fix of [R] base read.table() function according to
+  the r-help mailing list. This fix will be removed when as soon
+  as they will update [R].
+
+
+Version: 0.5 [2002-01-17]
+o Added zscore().
+o Updated plot.histogram to be compatible with [R] v1.4.0.
+
+
+Version: 0.4 [2002-01-10]
+
+
+Version: 0.3 [2001-08-03]
+
+
+Version: 0.2 [2001-07-24]
+
+
+Version: 0.1 [2001-08-03]
+o Created!
